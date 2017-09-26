@@ -32,6 +32,10 @@ public class Counter {
     public Date getDate() {
         return this.date;
     }
+    public String getShortDate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return dateFormat.format(this.date);
+    }
     private void updateDate() {
         this.date = new Date();
     }

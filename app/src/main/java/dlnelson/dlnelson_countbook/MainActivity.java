@@ -8,8 +8,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    private List<Counter> counterList = new ArrayList<Counter>();
+    private CounterAdapter counterAdapter;
+    private ListView counterListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,12 +26,17 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        counterListView = (ListView) findViewById(R.id.counterListView);
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                //TODO: default values to use for testing layout. change to fragment for getting data from user.
+                Counter counter = new Counter("Name", 30, "test");
+                counterList.add(counter);
+                counterAdapter.notifyDataSetChanged();
+
             }
         });
     }
@@ -48,5 +61,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //load
+        counterAdapter = new CounterAdapter(this, counterList);
+        counterListView.setAdapter(counterAdapter);
     }
 }
