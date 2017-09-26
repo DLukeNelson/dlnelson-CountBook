@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
                 Counter counter = new Counter("Name", 30, "test");
                 counterList.add(counter);
                 counterAdapter.notifyDataSetChanged();
-
             }
         });
     }

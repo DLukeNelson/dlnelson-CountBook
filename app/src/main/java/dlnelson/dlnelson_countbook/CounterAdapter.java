@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.List;
@@ -32,8 +33,34 @@ public class CounterAdapter extends ArrayAdapter<Counter> {
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
         View rowView = inflater.inflate(R.layout.counter_list_item, parent, false);
+
+        //Get "-" button and attach an decrement method.
+        Button decButton = (Button) rowView.findViewById(R.id.dec_button);
+        decButton.setTag(position);
+        decButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int position = (Integer) view.getTag();
+                Counter counter = getItem(position);
+                counter.decrementValue();
+                notifyDataSetChanged();
+            }
+        });
+
+        //Get "+" button and attach an increment method.
+        Button incButton = (Button) rowView.findViewById(R.id.inc_button);
+        incButton.setTag(position);
+        incButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int position = (Integer) view.getTag();
+                Counter counter = getItem(position);
+                counter.incrementValue();
+                notifyDataSetChanged();
+            }
+        });
+
         TextView name = (TextView) rowView.findViewById(R.id.name_field);
         TextView date = (TextView) rowView.findViewById(R.id.date_field);
         TextView value = (TextView) rowView.findViewById(R.id.value_field);
