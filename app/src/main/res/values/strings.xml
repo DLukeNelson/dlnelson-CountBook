@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">dlnelson-CountBook</string>
     <string name="action_settings">Settings</string>
+    <string name="initial_value">Initial Value</string>
+    <string name="name">Name</string>
+    <string name="current_value">Current Value</string>
+    <string name="title_activity_edit_counter">edit_counter</string>
 </resources>
