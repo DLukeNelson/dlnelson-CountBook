@@ -1,5 +1,6 @@
 package dlnelson.dlnelson_countbook;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -8,13 +9,19 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    public static final String COUNTER = "com.example.dlnelson_countbook.COUNTER";
+
     private List<Counter> counterList = new ArrayList<Counter>();
     private CounterAdapter counterAdapter;
     private ListView counterListView;
@@ -68,5 +75,21 @@ public class MainActivity extends AppCompatActivity {
         //load
         counterAdapter = new CounterAdapter(this, counterList);
         counterListView.setAdapter(counterAdapter);
+
+        counterListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                editCounter(position);
+            }
+        });
+    }
+
+    public void editCounter(int position) {
+        Intent intent = new Intent(this, CounterActivity.class);
+        Counter counter = counterList.get(position);
+        Gson gson = new Gson();
+        String json = gson.toJson(counter);
+        intent.putExtra(COUNTER, (new Gson()).toJson(counter));
+        startActivity(intent);
     }
 }

@@ -5,4 +5,8 @@
     <string name="name">Name</string>
     <string name="current_value">Current Value</string>
     <string name="title_activity_edit_counter">edit_counter</string>
+    <string name="list_name">Name</string>
+    <string name="list_date">Date</string>
+    <string name="list_value">value</string>
+    <string name="comment_optional">Comment (optional)</string>
 </resources>

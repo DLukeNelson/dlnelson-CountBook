@@ -95,7 +95,7 @@
         android:id="@+id/comment_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Comment" />
+        android:text="@string/comment_optional" />
 
     <EditText
         android:id="@+id/comment_field"
