@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 
@@ -39,10 +40,13 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: default values to use for testing layout. change to fragment for getting data from user.
-                Counter counter = new Counter("Name", 30, "test");
-                counterList.add(counter);
-                counterAdapter.notifyDataSetChanged();
+            //TODO: default values to use for testing layout. change to fragment for getting data from user.
+            Counter counter = new Counter("Name", 30, "test");
+            counterList.add(counter);
+            counterAdapter.notifyDataSetChanged();
+
+            TextView totalCounters = (TextView) findViewById(R.id.counters_total);
+            totalCounters.setText(String.format("Counters: %d", counterList.size()));
             }
         });
     }
