@@ -47,7 +47,9 @@
             android:text="@string/initial_value"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginStart="16dp" />
+            android:layout_marginStart="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="16dp" />
 
         <EditText
             android:id="@+id/initial_field"
@@ -75,32 +77,53 @@
             android:layout_marginTop="16dp"
             android:text="@string/current_value"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="16dp" />
 
         <EditText
             android:id="@+id/current_field"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:layout_marginRight="0dp"
             android:ems="10"
             android:inputType="number"
             app:layout_constraintBaseline_toBaselineOf="@+id/current_title"
             app:layout_constraintLeft_toRightOf="@+id/current_title"
             app:layout_constraintRight_toRightOf="parent"
-            tools:layout_editor_absoluteY="0dp" />
+            android:layout_marginStart="16dp" />
     </android.support.constraint.ConstraintLayout>
 
-    <TextView
-        android:id="@+id/comment_title"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/comment_optional" />
+        android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/comment_field"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName" />
+        <TextView
+            android:id="@+id/comment_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/comment_optional"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHorizontal_bias="0.0" />
+
+        <EditText
+            android:id="@+id/comment_field"
+            android:layout_width="328dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:selectAllOnFocus="true"
+            android:textAlignment="viewStart"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/comment_title" />
+    </android.support.constraint.ConstraintLayout>
+
 </LinearLayout>

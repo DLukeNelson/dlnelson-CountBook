@@ -64,9 +64,10 @@ public class CounterAdapter extends ArrayAdapter<Counter> {
         TextView name = (TextView) rowView.findViewById(R.id.name_field);
         TextView date = (TextView) rowView.findViewById(R.id.date_field);
         TextView value = (TextView) rowView.findViewById(R.id.value_field);
-        name.setText(values.get(position).getName());
-        date.setText(values.get(position).getShortDate());
-        value.setText(((Integer)values.get(position).getCurrentValue()).toString());
+        Counter counter = values.get(position);
+        name.setText(counter.getName());
+        date.setText(counter.getShortDate());
+        value.setText(String.format("%d", counter.getCurrentValue()));
         return rowView;
     }
 }
