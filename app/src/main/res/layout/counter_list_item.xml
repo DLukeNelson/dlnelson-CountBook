@@ -36,7 +36,7 @@
 
     <TextView
         android:id="@+id/value_field"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/list_value"
         android:textSize="30sp"
@@ -44,13 +44,13 @@
         app:layout_constraintLeft_toRightOf="@+id/date_field"
         app:layout_constraintRight_toLeftOf="@+id/dec_button"
         android:layout_marginLeft="32dp"
-        android:layout_marginRight="16dp" />
+        android:layout_marginRight="0dp" />
 
     <Button
         android:id="@+id/dec_button"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_marginLeft="32dp"
+        android:layout_marginLeft="48dp"
         android:text="-"
         android:textSize="24sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/value_field"
@@ -63,7 +63,7 @@
         android:id="@+id/inc_button"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_marginRight="0dp"
+        android:layout_marginRight="16dp"
         android:text="+"
         android:textSize="24sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/dec_button"
