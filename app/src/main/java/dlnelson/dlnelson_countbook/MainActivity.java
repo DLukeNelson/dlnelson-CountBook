@@ -3,25 +3,24 @@ package dlnelson.dlnelson_countbook;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
+import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    public static final String COUNTER = "com.example.dlnelson_countbook.COUNTER";
+    public static int EDIT_COUNTER = 0;
+    public static int NEW_COUNTER = 1;
+    public static Counter counterToEdit;
+    private static int counterPositionInList;
+
 
     private List<Counter> counterList = new ArrayList<Counter>();
     private CounterAdapter counterAdapter;
@@ -90,10 +89,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void editCounter(int position) {
         Intent intent = new Intent(this, CounterActivity.class);
-        Counter counter = counterList.get(position);
-        Gson gson = new Gson();
-        String json = gson.toJson(counter);
-        intent.putExtra(COUNTER, (new Gson()).toJson(counter));
-        startActivity(intent);
+        counterToEdit = counterList.get(position);
+        counterPositionInList = position;
+        startActivityForResult(intent, EDIT_COUNTER);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //Nothing yet. Will be needed for deleting a counter.
+        return;
     }
 }

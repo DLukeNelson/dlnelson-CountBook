@@ -1,14 +1,18 @@
 package dlnelson.dlnelson_countbook;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
 public class CounterActivity extends AppCompatActivity {
+    public static int COUNTER_NO_CHANGE = 0;
+    public static int COUNTER_DELETE = 1;
+    public static int COUNTER_CHANGED = 2;
+
+    private Counter counter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,20 +20,42 @@ public class CounterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_counter);
 
         //get the fields that need to be populated from the counter.
-        EditText nameField = (EditText) findViewById(R.id.name_field);
-        EditText initialField = (EditText) findViewById(R.id.initial_field);
-        EditText currentField = (EditText) findViewById(R.id.current_field);
-        EditText commentField = (EditText) findViewById(R.id.comment_field);
+        final EditText nameField = (EditText) findViewById(R.id.name_field);
+        final EditText initialField = (EditText) findViewById(R.id.initial_field);
+        final EditText currentField = (EditText) findViewById(R.id.current_field);
+        final EditText commentField = (EditText) findViewById(R.id.comment_field);
 
         //get information about the counter to display from the intent.
-        Intent intent = getIntent();
-        String json = intent.getStringExtra(MainActivity.COUNTER);
-        Counter counter = (new Gson()).fromJson(json, new TypeToken<Counter>() {}.getType());
+        counter = MainActivity.counterToEdit;
 
         //populate the fields from the info in the counter.
         nameField.setText(counter.getName());
         initialField.setText(String.format("%d", counter.getInitialValue()));
         currentField.setText(String.format("%d", counter.getCurrentValue()));
         commentField.setText(counter.getComment());
+
+        //Attach handlers to the save and cancel buttons.
+        Button save = (Button) findViewById(R.id.save_button);
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                counter.setName(nameField.getText().toString());
+                counter.setInitialValue(Integer.valueOf(initialField.getText().toString()));
+                counter.setCurrentValue(Integer.valueOf(currentField.getText().toString()));
+                counter.setComment(commentField.getText().toString());
+
+                setResult(COUNTER_CHANGED);
+                finish();
+            }
+        });
+
+        Button cancel = (Button) findViewById(R.id.cancel_button);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setResult(COUNTER_NO_CHANGE);
+                finish();
+            }
+        });
     }
 }
