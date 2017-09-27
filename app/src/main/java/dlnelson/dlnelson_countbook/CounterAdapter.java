@@ -61,6 +61,19 @@ public class CounterAdapter extends ArrayAdapter<Counter> {
             }
         });
 
+        //Get reset button and attach an increment method.
+        Button resetButton = (Button) rowView.findViewById(R.id.reset_button);
+        resetButton.setTag(position);
+        resetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int position = (Integer) view.getTag();
+                Counter counter = getItem(position);
+                counter.resetValue();
+                notifyDataSetChanged();
+            }
+        });
+
         TextView name = (TextView) rowView.findViewById(R.id.name_field);
         TextView date = (TextView) rowView.findViewById(R.id.date_field);
         TextView value = (TextView) rowView.findViewById(R.id.value_field);

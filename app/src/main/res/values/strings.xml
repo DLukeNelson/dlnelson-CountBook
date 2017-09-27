@@ -12,4 +12,7 @@
     <string name="edit_save">Save</string>
     <string name="edit_delete">Delete</string>
     <string name="edit_cancel">Cancel</string>
+    <string name="list_dec">-</string>
+    <string name="list_inc">+</string>
+    <string name="list_reset">Reset</string>
 </resources>

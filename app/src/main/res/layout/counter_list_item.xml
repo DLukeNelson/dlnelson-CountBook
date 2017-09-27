@@ -11,8 +11,8 @@
 
     <TextView
         android:id="@+id/name_field"
-        android:layout_width="135dp"
-        android:layout_height="wrap_content"
+        android:layout_width="125dp"
+        android:layout_height="22dp"
         android:layout_marginStart="16dp"
         android:text="@string/list_name"
         android:textSize="18sp"
@@ -20,7 +20,8 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="16dp"
         android:layout_marginLeft="16dp"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:layout_editor_absoluteY="16dp" />
 
     <TextView
         android:id="@+id/date_field"
@@ -37,34 +38,50 @@
     <TextView
         android:id="@+id/value_field"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="47dp"
         android:text="@string/list_value"
         android:textSize="30sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/date_field"
         app:layout_constraintLeft_toRightOf="@+id/date_field"
+        app:layout_constraintRight_toLeftOf="@+id/reset_button"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp" />
+
+    <Button
+        android:id="@+id/reset_button"
+        android:layout_width="62dp"
+        android:layout_height="49dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:text="@string/list_reset"
+        android:textSize="12sp"
+
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toRightOf="@+id/value_field"
         app:layout_constraintRight_toLeftOf="@+id/dec_button"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="0dp" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="35dp"
+        tools:layout_editor_absoluteY="34dp" />
 
     <Button
         android:id="@+id/dec_button"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_marginLeft="48dp"
-        android:text="-"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="0dp"
+        android:text="@string/list_dec"
         android:textSize="24sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/value_field"
-        app:layout_constraintLeft_toRightOf="@+id/name_field"
-        app:layout_constraintRight_toLeftOf="@+id/inc_button"
         app:layout_constraintHorizontal_bias="0.5"
-        android:layout_marginRight="0dp" />
+        app:layout_constraintLeft_toRightOf="@+id/reset_button"
+        app:layout_constraintRight_toLeftOf="@+id/inc_button" />
 
     <Button
         android:id="@+id/inc_button"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginRight="16dp"
-        android:text="+"
+        android:text="@string/list_inc"
         android:textSize="24sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/dec_button"
         app:layout_constraintLeft_toRightOf="@+id/dec_button"
