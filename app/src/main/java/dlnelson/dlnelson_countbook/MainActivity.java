@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private List<Counter> counterList = new ArrayList<Counter>();
     private CounterAdapter counterAdapter;
     private ListView counterListView;
+    private TextView totalCounters;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
             counterList.add(counter);
             counterAdapter.notifyDataSetChanged();
 
-            TextView totalCounters = (TextView) findViewById(R.id.counters_total);
+            totalCounters = (TextView) findViewById(R.id.counters_total);
             totalCounters.setText(String.format("Counters: %d", counterList.size()));
             }
         });
@@ -96,7 +97,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        //Nothing yet. Will be needed for deleting a counter.
-        return;
+        if( EDIT_COUNTER == requestCode && CounterActivity.COUNTER_DELETE == resultCode) {
+            counterList.remove(counterPositionInList);
+            counterAdapter.notifyDataSetChanged();
+            totalCounters.setText(String.format("Counters: %d", counterList.size()));
+        }
     }
 }

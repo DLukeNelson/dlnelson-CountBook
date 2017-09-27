@@ -34,7 +34,7 @@ public class CounterActivity extends AppCompatActivity {
         currentField.setText(String.format("%d", counter.getCurrentValue()));
         commentField.setText(counter.getComment());
 
-        //Attach handlers to the save and cancel buttons.
+        //Attach handlers to the save, delete, and cancel buttons.
         Button save = (Button) findViewById(R.id.save_button);
         save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,6 +45,15 @@ public class CounterActivity extends AppCompatActivity {
                 counter.setComment(commentField.getText().toString());
 
                 setResult(COUNTER_CHANGED);
+                finish();
+            }
+        });
+
+        Button delete = (Button) findViewById(R.id.delete_button);
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setResult(COUNTER_DELETE);
                 finish();
             }
         });
