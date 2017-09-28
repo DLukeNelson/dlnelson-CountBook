@@ -15,4 +15,5 @@
     <string name="list_dec">-</string>
     <string name="list_inc">+</string>
     <string name="list_reset">Reset</string>
+    <string name="unfilled_fields">Please fill out all required fields.</string>
 </resources>

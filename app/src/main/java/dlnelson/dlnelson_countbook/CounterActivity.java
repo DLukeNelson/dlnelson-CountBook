@@ -1,11 +1,12 @@
 package dlnelson.dlnelson_countbook;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class CounterActivity extends AppCompatActivity {
     public static int COUNTER_NO_CHANGE = 0;
@@ -21,6 +22,7 @@ public class CounterActivity extends AppCompatActivity {
 
         //get the fields that need to be populated from the counter.
         final EditText nameField = (EditText) findViewById(R.id.name_field);
+        final TextView dateField = (TextView) findViewById(R.id.date_field);
         final EditText initialField = (EditText) findViewById(R.id.initial_field);
         final EditText currentField = (EditText) findViewById(R.id.current_field);
         final EditText commentField = (EditText) findViewById(R.id.comment_field);
@@ -30,6 +32,7 @@ public class CounterActivity extends AppCompatActivity {
 
         //populate the fields from the info in the counter.
         nameField.setText(counter.getName());
+        dateField.setText(counter.getShortDate());
         initialField.setText(String.format("%d", counter.getInitialValue()));
         currentField.setText(String.format("%d", counter.getCurrentValue()));
         commentField.setText(counter.getComment());
@@ -39,13 +42,23 @@ public class CounterActivity extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                counter.setName(nameField.getText().toString());
-                counter.setInitialValue(Integer.valueOf(initialField.getText().toString()));
-                counter.setCurrentValue(Integer.valueOf(currentField.getText().toString()));
-                counter.setComment(commentField.getText().toString());
+                String name = nameField.getText().toString();
+                String initialValue = initialField.getText().toString();
+                String currentValue = currentField.getText().toString();
 
-                setResult(COUNTER_CHANGED);
-                finish();
+                //Check if the user left any empty fields.
+                if (name.equals("") || initialValue.equals("") || currentValue.equals("") ) {
+                    Toast.makeText(getApplicationContext(), getString(R.string.unfilled_fields),
+                            Toast.LENGTH_LONG).show();
+                } else {
+                    counter.setName(name);
+                    counter.setInitialValue(Integer.valueOf(initialValue));
+                    counter.setCurrentValue(Integer.valueOf(currentValue));
+                    counter.setComment(commentField.getText().toString());
+
+                    setResult(COUNTER_CHANGED);
+                    finish();
+                }
             }
         });
 
