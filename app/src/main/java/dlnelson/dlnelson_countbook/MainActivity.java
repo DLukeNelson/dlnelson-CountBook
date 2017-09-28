@@ -33,20 +33,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        totalCounters = (TextView) findViewById(R.id.counters_total);
         counterListView = (ListView) findViewById(R.id.counterListView);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            //TODO: default values to use for testing layout. change to fragment for getting data from user.
-            Counter counter = new Counter("Name", 30, "test");
-            counterList.add(counter);
-            counterAdapter.notifyDataSetChanged();
-
-            totalCounters = (TextView) findViewById(R.id.counters_total);
-            totalCounters.setText(String.format("Counters: %d", counterList.size()));
+            newCounter();
             }
         });
     }
@@ -88,19 +82,34 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void newCounter() {
+        Intent intent = new Intent(this, CounterActivity.class);
+        counterToEdit = new Counter("A", 0, "");
+        intent.putExtra("requestCode", NEW_COUNTER);
+        startActivityForResult(intent, NEW_COUNTER);
+    }
+
     public void editCounter(int position) {
         Intent intent = new Intent(this, CounterActivity.class);
         counterToEdit = counterList.get(position);
         counterPositionInList = position;
+        intent.putExtra("requestCode", EDIT_COUNTER);
         startActivityForResult(intent, EDIT_COUNTER);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if( EDIT_COUNTER == requestCode && CounterActivity.COUNTER_DELETE == resultCode) {
+        if (EDIT_COUNTER == requestCode && CounterActivity.COUNTER_DELETE == resultCode) {
             counterList.remove(counterPositionInList);
             counterAdapter.notifyDataSetChanged();
-            totalCounters.setText(String.format("Counters: %d", counterList.size()));
+            setTotalCounters();
+        } else if (NEW_COUNTER == requestCode && CounterActivity.COUNTER_SAVED == resultCode) {
+            counterList.add(counterToEdit);
+            setTotalCounters();
         }
+    }
+
+    public void setTotalCounters() {
+        totalCounters.setText(String.format("Counters: %d", counterList.size()));
     }
 }

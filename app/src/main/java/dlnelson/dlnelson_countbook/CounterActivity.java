@@ -1,5 +1,6 @@
 package dlnelson.dlnelson_countbook;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -11,7 +12,7 @@ import android.widget.Toast;
 public class CounterActivity extends AppCompatActivity {
     public static int COUNTER_NO_CHANGE = 0;
     public static int COUNTER_DELETE = 1;
-    public static int COUNTER_CHANGED = 2;
+    public static int COUNTER_SAVED = 2;
 
     private Counter counter;
 
@@ -26,19 +27,45 @@ public class CounterActivity extends AppCompatActivity {
         final EditText initialField = (EditText) findViewById(R.id.initial_field);
         final EditText currentField = (EditText) findViewById(R.id.current_field);
         final EditText commentField = (EditText) findViewById(R.id.comment_field);
+        int requestCode = MainActivity.EDIT_COUNTER;        /* Choose edit by default */
 
-        //get information about the counter to display from the intent.
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        if (bundle != null && bundle.get("requestCode") != null) {
+            requestCode = (int) bundle.get("requestCode");
+        }
+
+        //get the counter to display from the MainActivity.
         counter = MainActivity.counterToEdit;
 
-        //populate the fields from the info in the counter.
-        nameField.setText(counter.getName());
-        dateField.setText(counter.getShortDate());
-        initialField.setText(String.format("%d", counter.getInitialValue()));
-        currentField.setText(String.format("%d", counter.getCurrentValue()));
-        commentField.setText(counter.getComment());
+        if (requestCode == MainActivity.EDIT_COUNTER) {
+            //populate the fields from the info in the counter.
+            nameField.setText(counter.getName());
+            dateField.setText(counter.getShortDate());
+            initialField.setText(String.format("%d", counter.getInitialValue()));
+            currentField.setText(String.format("%d", counter.getCurrentValue()));
+            commentField.setText(counter.getComment());
+
+            //Only attach a handler to the delete button if in edit mode.
+            Button delete = (Button) findViewById(R.id.delete_button);
+            delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    setResult(COUNTER_DELETE);
+                    finish();
+                }
+            });
+        }
+        else {
+            Button delete = (Button) findViewById(R.id.delete_button);
+            delete.setEnabled(false);
+            currentField.setText("Set to initial value.");
+            currentField.setFocusable(false);
+        }
 
         //Attach handlers to the save, delete, and cancel buttons.
         Button save = (Button) findViewById(R.id.save_button);
+        final int finalRequestCode = requestCode;
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,21 +80,16 @@ public class CounterActivity extends AppCompatActivity {
                 } else {
                     counter.setName(name);
                     counter.setInitialValue(Integer.valueOf(initialValue));
-                    counter.setCurrentValue(Integer.valueOf(currentValue));
+                    if(finalRequestCode == MainActivity.NEW_COUNTER) {
+                        counter.setCurrentValue(Integer.valueOf(initialValue));
+                    } else {
+                        counter.setCurrentValue(Integer.valueOf(currentValue));
+                    }
                     counter.setComment(commentField.getText().toString());
 
-                    setResult(COUNTER_CHANGED);
+                    setResult(COUNTER_SAVED);
                     finish();
                 }
-            }
-        });
-
-        Button delete = (Button) findViewById(R.id.delete_button);
-        delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setResult(COUNTER_DELETE);
-                finish();
             }
         });
 

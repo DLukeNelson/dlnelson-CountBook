@@ -16,4 +16,6 @@
     <string name="list_inc">+</string>
     <string name="list_reset">Reset</string>
     <string name="unfilled_fields">Please fill out all required fields.</string>
+    <string name="last_changed_date">Last Changed Date</string>
+    <string name="set_when_saving_counter">Set when saving counter</string>
 </resources>
