@@ -45,7 +45,7 @@
         app:layout_constraintLeft_toRightOf="@+id/date_field"
         app:layout_constraintRight_toLeftOf="@+id/reset_button"
         android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp" />
+        android:layout_marginRight="8dp" />
 
     <Button
         android:id="@+id/reset_button"
@@ -67,7 +67,7 @@
         android:id="@+id/dec_button"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginRight="0dp"
         android:text="@string/list_dec"
         android:textSize="24sp"
@@ -80,7 +80,7 @@
         android:id="@+id/inc_button"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginRight="8dp"
         android:text="@string/list_inc"
         android:textSize="24sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/dec_button"
