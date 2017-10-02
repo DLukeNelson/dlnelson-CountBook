@@ -32,6 +32,8 @@ public class Counter {
     public Date getDate() {
         return this.date;
     }
+
+    //Provide a secondary getter for the date that comes as an already formatted string.
     public String getShortDate() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         return dateFormat.format(this.date);
@@ -68,6 +70,7 @@ public class Counter {
     }
 
     public void decrementValue() {
+        //Counter must always be a non-negative integer.
         if (this.currentValue > 0) {
             this.currentValue -= 1;
             this.updateDate();
