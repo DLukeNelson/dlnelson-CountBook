@@ -1,6 +1,5 @@
 package dlnelson.dlnelson_countbook;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -13,20 +12,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
-
 public class MainActivity extends AppCompatActivity {
     public static int EDIT_COUNTER = 0;
     public static int NEW_COUNTER = 1;
@@ -34,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private static int counterPositionInList;
     private boolean saveLoadFiles = true;
 
-    private saveableCounterList counterList;
+    private SaveableCounterList counterList;
     private CounterAdapter counterAdapter;
     private ListView counterListView;
     private TextView totalCounters;
@@ -82,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        counterList = new saveableCounterList(getApplicationContext());
+        counterList = new SaveableCounterList(getApplicationContext());
         counterAdapter = new CounterAdapter(this, counterList);
         counterListView.setAdapter(counterAdapter);
 

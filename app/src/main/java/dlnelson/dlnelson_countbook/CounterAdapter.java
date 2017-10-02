@@ -14,10 +14,10 @@ import android.widget.TextView;
 
 public class CounterAdapter extends ArrayAdapter<Counter> {
     private final Context context;
-    private final saveableCounterList counterList;
+    private final SaveableCounterList counterList;
 
 
-    public CounterAdapter(Context context, saveableCounterList counterList) {
+    public CounterAdapter(Context context, SaveableCounterList counterList) {
         super(context, 0, counterList.getValues());
         this.context = context;
         this.counterList = counterList;

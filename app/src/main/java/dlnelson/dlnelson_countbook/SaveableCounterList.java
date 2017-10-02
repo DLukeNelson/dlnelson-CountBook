@@ -20,13 +20,13 @@ import java.util.List;
  * Created by Luke on 2017-09-28.
  */
 
-public class saveableCounterList {
+public class SaveableCounterList {
     private static String FILENAME = "dlnelson.counterList.sav";
 
     private Context context;
     private List<Counter> values;
 
-    public saveableCounterList(Context context) {
+    public SaveableCounterList(Context context) {
         super();
         this.context = context;
         load();
